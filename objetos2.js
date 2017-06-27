@@ -17,23 +17,26 @@ function ejercicio1 (numInicial, numFinal){
 
 
 //Ejercicio 2
-function superCoder (nombre, edad, ocupacion, genero){
-  this.nombre = nombre;
-  this.edad = edad;
-  this.ocupacion = ocupacion;
-  this.genero = genero;
-  this.mensaje = function(){
-    if (evaluando.nombre!=null&&evaluando.edad > 17 && this.ocupacion == "Estudiante Laboratoria" && this.genero=='femenino'){
-       var respuesta = 'You are awesome';
-    } else {
-      var respuesta = 'Upsiii';
+function ejercicio2 (nombre, edad, ocupacion, genero){
+    function superCoder (nombre, edad, ocupacion, genero){
+      this.nombre = nombre;
+      this.edad = edad;
+      this.ocupacion = ocupacion;
+      this.genero = genero;
+      this.mensaje = function(){
+        if (evaluando.nombre!=null && evaluando.edad > 17 && evaluando.ocupacion.toLowerCase() == "estudiante laboratoria"||evaluando.ocupacion.toLowerCase() =="web developer" && evaluando.genero.toLowerCase()=='femenino'){
+           var respuesta = 'You are awesome';
+        } else {
+          var respuesta = 'Upsiii';
+        }
+        return respuesta;
+      }
     }
-    return respuesta;
-  }
+    var evaluando = new superCoder(nombre, edad, ocupacion, genero);
+  return evaluando.mensaje();
 }
-var evaluando = new superCoder('Tamara', 16, "Estudiante Laboratoria", "femenino");
-
-//console.log(evaluando.mensaje());
+    
+//console.log(ejercicio2('Tamara', 22, 'Estudiante Laboratoria', 'femenino'));
 
 //Ejercicio 3
 function arr (arreglo){
@@ -54,20 +57,23 @@ console.log(arr([6, 5, 4, 3, 2, 1]));
 
 
 //Ejercicio 4
-function pacientes (nombre, apellido, edad, genero, ciudad, pais){
-  this.nombre = nombre;
-  this.apellido = apellido;
-  this.edad = edad;
-  this.genero = genero;
-  this.ciudad = ciudad;
-  this.pais = pais;
-  
-  this.ficha  = function(){
-    return 'Nombre: '+registro.nombre+' '+registro.apellido + '\n'+'Edad: '+registro.edad+'\n'+'País: '+registro.pais;
+function ejercicio4(nombre, apellido, edad, genero, ciudad, pais){
+    function pacientes (nombre, apellido, edad, genero, ciudad, pais){
+    this.nombre = nombre;
+    this.apellido = apellido;
+    this.edad = edad;
+    this.genero = genero;
+    this.ciudad = ciudad;
+    this.pais = pais;
+
+    this.ficha  = function(){
+      return 'Nombre: '+registro.nombre+' '+registro.apellido + '\n'+'Edad: '+registro.edad+'\n'+'País: '+registro.pais;
+    }
   }
+  var registro = new pacientes(nombre, apellido, edad, genero, ciudad, pais);
+  return registro.ficha();
 }
-var registro = new pacientes('Blanca', 'Perez', 19, 'Femenino', "Santiago", "Chile");
-//console.log(registro.ficha());
+//console.log(ejercicio4('Blanca', 'Perez', 19, 'Femenino', "Santiago", "Chile"));
 
 //Pruebas Unitarias
 
@@ -88,8 +94,18 @@ describe('Ejercicios Objetos II', function(){
     //Ejercicio 2 
     describe('Ejercicio 2', function(){
         it('Prueba de mayor que 17', function(){
-            assert.equal('Upsiii', new superCoder('Tamara', 16, 'Estudiante Laboratoria', 'femenino').mensaje());
+            assert.equal('Upsiii', ejercicio2('Tamara', 16, 'Estudiante Laboratoria', 'femenino'));
         });
+        it('Prueba de mayor que 17', function(){
+            assert.equal('You are awesome', ejercicio2('Aydee', 22, 'Estudiante Laboratoria', 'femenino'));
+        });
+        it('Prueba de mayor que 17', function(){
+            assert.equal('You are awesome', ejercicio2('Milagros', 18, 'web developer', 'FEMENINO'));
+        });
+        it('Prueba de mayor que 17', function(){
+            assert.equal('Upsiii', ejercicio2('EVELIN', 11, 'ESTUDIANTE LABORATORIA', 'femenino'));
+        });
+
 
     });
     
@@ -106,7 +122,10 @@ describe('Ejercicios Objetos II', function(){
     //Ejercicio 4 
     describe('Ejercicio 4', function(){
         it('Registro de pacientes', function(){
-            assert.equal("Nombre: Blanca Perez\nEdad: 19\nPaís: Chile", new pacientes('Blanca', 'Perez', 19, 'Femenino', "Santiago", "Chile").ficha());
+            assert.equal("Nombre: Blanca Perez\nEdad: 19\nPaís: Chile", ejercicio4('Blanca', 'Perez', 19, 'Femenino', "Santiago", "Chile"));
+        });
+        it('Registro de pacientes', function(){
+            assert.equal("Nombre: Carina Mendoza\nEdad: 25\nPaís: Peru", ejercicio4('Carina', 'Mendoza', 25, 'Femenino', "Arequipa", "Peru"));
         });
 
     });
