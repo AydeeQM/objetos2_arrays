@@ -39,21 +39,20 @@ function ejercicio2 (nombre, edad, ocupacion, genero){
 //console.log(ejercicio2('Tamara', 22, 'Estudiante Laboratoria', 'femenino'));
 
 //Ejercicio 3
-function arr (arreglo){
-  var texto = {
-    propiedad1: arreglo[0],
-    propiedad2: arreglo[1],
-    propiedad3: arreglo[2],
-    propiedad4: arreglo[3],
-    propiedad5: arreglo[4],
-    propiedad6: arreglo[5],
-    concatenarTexto: function(){
-       return "Propiedad1-->"+this.propiedad1+';'+"Propiedad2-->"+this.propiedad2+';'+"Propiedad3-->"+this.propiedad3+';'+"Propiedad4-->"+this.propiedad4+';'+"Propiedad5-->"+this.propiedad5+';'+"Propiedad6-->"+this.propiedad6;
-     }
-  };
-  return texto.concatenarTexto();
+function arreglo (arr){
+  var resultado = "";
+  var texto = {};
+  for (var i = 0; i <arr.length ;i++){
+    texto [(i+1)] = arr[i];
+    if(i==(arr.length-1)){
+      resultado += "Propiedad"+(i+1)+"-->" + arr[i];
+    }else{
+      resultado += "Propiedad"+(i+1)+"-->" + arr[i]+";";
+    }
+  }
+  return resultado;
 }
-console.log(arr([6, 5, 4, 3, 2, 1]));
+//console.log(arreglo([6, 5, 4, 3, 2, 1]));
 
 
 //Ejercicio 4
@@ -112,10 +111,10 @@ describe('Ejercicios Objetos II', function(){
     //Ejercicio 3 
     describe('Ejercicio 3', function(){
         it('Prueba de arrays', function(){
-            assert.equal("Propiedad1-->6;Propiedad2-->5;Propiedad3-->4;Propiedad4-->3;Propiedad5-->2;Propiedad6-->1", arr([6, 5, 4, 3, 2, 1]));
+            assert.equal("Propiedad1-->6;Propiedad2-->5;Propiedad3-->4;Propiedad4-->3;Propiedad5-->2;Propiedad6-->1", arreglo([6, 5, 4, 3, 2, 1]));
         });
         it('Prueba de arrays', function(){
-            assert.equal("Propiedad1-->10;Propiedad2-->9;Propiedad3-->8;Propiedad4-->7;Propiedad5-->6;Propiedad6-->5", arr([10, 9, 8, 7, 6, 5]));
+            assert.equal("Propiedad1-->10;Propiedad2-->9;Propiedad3-->8;Propiedad4-->7;Propiedad5-->6;Propiedad6-->5", arreglo([10, 9, 8, 7, 6, 5]));
         });
     });
     
